@@ -278,14 +278,6 @@ export default {
   mounted () {
   	this.getProData()
   },
-  computed: {
-  	sortData () {
-  		const data = Object.keys(this.filterData).filter((value, key, arr) => {
-  			return value
-		})
-  		return data
-  	}
-  },
   methods: {
   	getProData () {
   		axios.get('/api/products.json')
