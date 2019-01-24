@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>文档标题</title>
+	<script src="node-modules/vue/dist/vue.js"></script>
+	<script src="node-modules/vue-resource/dist/vue-resource.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<div id="app" class="container">
+		<h1>Vue resource</h1>
+		<a href="javascript:;" class="btn btn-primary" @click="get">Get</a>
+		<a href="javascript:;" class="btn btn-primary" @click="post">Post</a>
+		<a href="javascript:;" class="btn btn-primary" @click="jsonp">JSONP</a>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				msg: ''
+			},
+			//设置全局请求地址
+			http: {
+				root: "http://localhost:8080"
+			},
+			methods: {
+				get: function () {
+					this.$http.get("package.json", {
+						params: {
+							userId: "101"
+						},
+						headers: {
+
+						}
+					}).then(
+					function(res){
+						this.msg = res.data;
+					},
+					function(error){
+						this.msg = error;
+					});
+				},
+				post : function(){
+					this.$http.post("package.json", {
+						userId:"102"
+					},{
+						headers:{
+							access_token:"abc"
+						}
+					}).then(function(res){
+						this.msg = res.data;
+					},
+					function(error){
+						this.msg = error;
+					});
+				},
+				jsonp : function(){
+					this.$http.jsonp("package.json", {})
+					.then(function(res){
+						this.msg = res.data;
+					})
+				},
+				http: function(){
+					this.$http({
+						url:"package.json",
+						params:{
+							userId:"102"
+						},
+						headers:{
+							token:"123"
+						},
+						timeout:5,
+						before: function(){
+
+						}
+					}).then(function(){
+						
+					})
+				}
+			},
+			mounted: function(){
+				//  全局拦截器
+				Vue.http.interceptors.push(function(request, next){
+					console.log("request init");
+					next(function(response){
+						console.log("response init");
+						return response;
+					})
+				});
+			}
+		})
+	</script>
+</body>
+</html>

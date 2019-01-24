@@ -1,0 +1,697 @@
+/*
+Author:YafullyZhao
+Date:20180411
+Discription:For all the web programes
+*/
+/*--公共变量--*/
+/*reset*/
+a:link,
+a:visited {
+  color: #515151;
+  text-decoration: none;
+  -webkit-transform: rotate(0);
+}
+a:hover {
+  color: #7b979a;
+  text-decoration: none;
+}
+.clear:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clear {
+  zoom: 1;
+}
+.hide,
+.whide {
+  display: none;
+}
+.button.hide {
+  display: none;
+}
+.show,
+.blk {
+  display: block;
+}
+.fleft {
+  float: left;
+}
+.fright {
+  float: right;
+}
+.fnone {
+  float: none;
+}
+.pd5 {
+  padding: 0.5em 0;
+}
+.pd05 {
+  padding: 0 5px;
+}
+.pd11 {
+  padding: 10px;
+}
+.pd10 {
+  padding: 1em 0;
+}
+.pd01 {
+  padding: 0 10px;
+}
+.pd20 {
+  padding: 20px 0 10px;
+}
+.pd15 {
+  padding: 0 15px 15px 15px;
+}
+.pd30 {
+  padding: 30px 0;
+}
+.pb20 {
+  padding-bottom: 2em;
+}
+.pb40 {
+  padding-bottom: 4em;
+}
+.pdr3 {
+  padding-right: 3px;
+}
+.pdr5 {
+  padding-right: 5px;
+}
+.pdl20 {
+  padding-left: 26px;
+}
+.pt5 {
+  padding-top: 5px;
+}
+.pt10 {
+  padding-top: 10px;
+}
+.pt20 {
+  padding-top: 20px;
+}
+.pt30 {
+  padding-top: 30px;
+}
+.mal5 {
+  margin-left: 5px;
+}
+.mal10 {
+  margin-left: 10px;
+}
+.mar5 {
+  margin-right: 5px;
+}
+.mar8 {
+  margin-right: 8px;
+}
+.mab20 {
+  margin-bottom: 20px;
+}
+.vm {
+  display: inline-block;
+  vertical-align: middle;
+}
+.vt {
+  display: inline-block;
+  vertical-align: top;
+}
+.mc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.abRt {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+.upper {
+  text-transform: uppercase;
+}
+.blod {
+  font-weight: 700;
+}
+.undline {
+  text-decoration: underline !important;
+}
+.italic {
+  font-style: italic;
+}
+.sizeBox {
+  box-sizing: border-box;
+}
+.ell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bk {
+  word-break: break-all;
+}
+.fw {
+  max-width: 100%;
+}
+.doTable {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+}
+.doTable.hide {
+  display: none;
+}
+.cell,
+.doTd {
+  display: table-cell;
+  box-sizing: border-box;
+}
+.doRow {
+  display: block;
+  width: 100%;
+}
+.fcenter {
+  float: left;
+  position: relative;
+  left: 50%;
+  padding: 5px 0;
+}
+.fcenter li {
+  display: block;
+  overflow: hidden;
+  float: left;
+  position: relative;
+  right: 50%;
+  margin: 0 3px;
+}
+.jstfy {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+}
+.justify_fix {
+  display: inline-block;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+}
+.cols_1,
+.cols_2,
+.cols_3,
+.cols_4,
+.cols_5,
+.cols_6,
+.cols_7,
+.cols_8,
+.cols_9,
+.cols_10,
+.cols_11,
+.cols_12 {
+  float: left;
+  box-sizing: border-box;
+}
+.cols_1 {
+  width: 8.33333333%;
+}
+.cols_2 {
+  width: 16.66666667%;
+}
+.cols_3 {
+  width: 25%;
+}
+.cols_4 {
+  width: 33.33333333%;
+}
+.cols_5 {
+  width: 41.66666667%;
+}
+.cols_6 {
+  width: 50%;
+}
+.cols_7 {
+  width: 58.33333333%;
+}
+.cols_8 {
+  width: 66.66666667%;
+}
+.cols_9 {
+  width: 75%;
+}
+.cols_10 {
+  width: 83.33333333%;
+}
+.cols_11 {
+  width: 91.66666667%;
+}
+.cols_12 {
+  width: 100%;
+}
+.unsecable {
+  -o-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.imglink {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+}
+.imglink img {
+  vertical-align: top;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+}
+.imglink:hover img {
+  opacity: 1;
+  -webkit-animation: flash 1.5s;
+  animation: flash 1.5s;
+}
+@-webkit-keyframes flash {
+  0% {
+    opacity: .4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes flash {
+  0% {
+    opacity: .4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.anilink {
+  position: relative;
+  overflow: hidden;
+}
+.anilink:after {
+  position: absolute;
+  width: 0;
+  height: 1px;
+  left: auto;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
+  content: '';
+}
+.anilink:hover:after {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
+/*--公共样式--*/
+/*--公共函数--*/
+.red,
+.red:link,
+.red:visited {
+  color: #cc0000 !important;
+}
+.green,
+.green:link,
+.green:visited {
+  color: #446b00;
+}
+.pink,
+.pink:link,
+.pink:visited {
+  color: #b67c5a;
+}
+.blue,
+.blue:link,
+.blue:visited {
+  color: #016481 !important;
+}
+.sky,
+.sky:link,
+.sky:visited {
+  color: #666666;
+}
+.oran,
+.oran:link,
+.oran:visited {
+  color: #b37d5b;
+}
+.brown,
+.brown:link,
+.brown:visited {
+  color: #b37d5b !important;
+}
+.gray,
+.gray:link,
+.gray:visited {
+  color: #999999;
+}
+.silver,
+.silver:link,
+.silver:visited {
+  color: #666666;
+}
+.white,
+.white:link,
+.white:visited {
+  color: #ffffff;
+}
+.black,
+.black:link,
+.black:visited {
+  color: #333333;
+}
+.banner {
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  padding-bottom: 41.67%;
+}
+.banner .first {
+  width: 100%;
+}
+.banner.rended .first {
+  display: none;
+}
+.banner .fotorama__nav-wrap--horizontal {
+  position: absolute;
+  z-index: 5;
+  bottom: 0;
+}
+.banner .bannerItem {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.banner .bannerItem a {
+  position: relative;
+  display: block;
+  height: 100%;
+}
+.inxSection {
+  position: relative;
+  z-index: 1;
+  padding: 4% 0;
+}
+.inxSection.graySec {
+  background: #f8f6f3;
+}
+.inxSection .inxvBg {
+  position: absolute;
+  z-index: 1;
+}
+.inxSection .inxvBg img {
+  width: 100%;
+}
+.inxThx img {
+  max-width: 100%;
+}
+.thxbg01 {
+  top: 0;
+  right: 0;
+}
+.thxbg02 {
+  bottom: 0;
+  left: 0;
+}
+.thxbg03 {
+  bottom: 0;
+  right: 0;
+}
+.thxbg04 {
+  top: 0;
+  left: 0;
+}
+.inxTit {
+  padding: 1em 0;
+  font: 30px/1.2 'Charter-Roman', Georgia, 'Times New Roman', Times, serif;
+  color: #8e8e8e;
+}
+.newArrival {
+  text-align: center;
+}
+.newArrival .action .button {
+  padding: 0 5%;
+  font-family: 'Charter-Roman', Georgia, 'Times New Roman', Times, serif;
+}
+.newArrival .proItem {
+  width: 32%;
+  margin-left: 2%;
+}
+.newArrival .proItem:first-child {
+  margin-left: 0;
+}
+.newArrStyle .proInfo {
+  display: none;
+}
+.newArrStyle .proItem .proPic {
+  border: none;
+}
+.inxCat .inxCatItem {
+  float: left;
+  width: 48.5%;
+  margin-left: 3%;
+}
+.inxCat .inxCatItem img {
+  max-width: 100%;
+}
+.inxCat .inxCatItem:first-child {
+  margin-left: 0;
+}
+.inxShare {
+  text-align: center;
+  padding: 1em 0;
+  color: #8e8e8e;
+}
+.inxShare .proItem {
+  width: 23.5%;
+  margin-left: 2%;
+}
+.inxShare .proItem .imglink {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.inxShare .proItem:first-child {
+  margin-left: 0;
+}
+.inxShare .inxShareSub {
+  font: 14px/1.6 'Charter-Roman', Georgia, 'Times New Roman', Times, serif;
+  padding-top: 2em;
+}
+.inxShare .blSub {
+  padding: 1em 0;
+  font-size: 18px;
+}
+.inxShare .inxShareBox {
+  position: relative;
+  z-index: 1;
+}
+.inxCast {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+}
+.inxCast img {
+  width: 100%;
+}
+.inxCast .inxVideoBox {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.shareView {
+  position: relative;
+  box-sizing: border-box;
+  padding: 1em 44px;
+  min-height: 500px;
+}
+.shareView .fotorama__fullscreen-icon {
+  right: auto;
+  left: 5px;
+}
+.shareView .mediaPin {
+  width: 55%;
+  box-sizing: border-box;
+  float: left;
+  position: relative;
+}
+.shareView .detail {
+  width: 45%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0 3%;
+}
+.shareView .sharev {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  cursor: pointer;
+}
+.shareView .sharev_prev {
+  left: 0;
+}
+.shareView .sharev_prev:after {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 1;
+  content: '\f442';
+  font-family: 'icomoon';
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  font-size: 44px;
+  color: #555555;
+}
+.shareView .sharev_next {
+  right: 0;
+}
+.shareView .sharev_next:after {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 1;
+  content: '\f444';
+  font-family: 'icomoon';
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  font-size: 44px;
+  color: #555555;
+}
+.shareView .tocart {
+  padding: 10px 0;
+}
+@media screen and (max-width: 767px) {
+  .banner {
+    padding-bottom: 58.33%;
+  }
+  .banner .fotorama__arr {
+    z-index: -1;
+    opacity: 0;
+  }
+  .inxSection {
+    padding: 5vh 0;
+  }
+  .thxbg01 {
+    width: 60px;
+    height: 75px;
+  }
+  .thxbg02 {
+    width: 100px;
+    height: 57px;
+  }
+  .thxbg03 {
+    width: 100px;
+    height: 59px;
+  }
+  .thxbg04 {
+    width: 100px;
+    height: 55px;
+  }
+  .inxTit {
+    padding: 1rem 0;
+    font: 1.4rem/1.2 'Charter-Roman', Georgia, 'Times New Roman', Times, serif;
+  }
+  .inxCat .inxCatItem {
+    float: none;
+    width: 100%;
+    margin-left: 0;
+  }
+  .inxCat .inxCatItem + .inxCatItem {
+    margin-top: 2rem;
+  }
+  .shareView .mediaPin {
+    width: 100%;
+    float: none;
+  }
+  .shareView .detail {
+    width: 100%;
+    float: none;
+    padding: 1rem 0 0 0;
+  }
+  .shareView .tocart {
+    text-align: center;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .thxbg01 {
+    width: 79px;
+    height: 99px;
+  }
+  .thxbg02 {
+    width: 180px;
+    height: 102px;
+  }
+  .thxbg03 {
+    width: 163px;
+    height: 96px;
+  }
+  .thxbg04 {
+    width: 154px;
+    height: 85px;
+  }
+  .inxTit {
+    font-size: 1.8rem;
+    padding: 1.5rem 0;
+  }
+  .inxCast {
+    height: 40vh;
+  }
+  .inxCast .lzy {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: inherit;
+  }
+  .inxCastBox {
+    padding: 0 1.5rem;
+    top: 2rem;
+    bottom: 2rem;
+    height: auto;
+  }
+  .inxCastBox .inxVideoBox {
+    left: 0;
+  }
+  .inxCastBox .inxCastItem:first-child {
+    display: none;
+  }
+  .inxCastBox .inxCastItem + .inxCastItem {
+    padding-left: 0;
+  }
+}
