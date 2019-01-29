@@ -105,45 +105,9 @@
 	                    </span>
 
 	                    <!--@pages-->
-	                    <div class="pages">
-
-	                        <!--@w-->
-	                        <div class="mhide">
-	                            <span class="pagesum">256 Results</span>
-	                            <span class="paging">
-	                                <a href="#" title="Prev" class="Pageprev disabled"></a>
-	                                <a href="javascript:;" class="pNum">1</a>
-	                                <a class="pNum clicked" href="#">22</a>
-	                                <a href="#" class="pNum">3</a>
-	                                <a href="#" class="pNum">4</a>
-	                                <a href="#" class="pNum">5</a>
-	                                ...
-	                                <a href="#" class="pNum">12</a>      
-	                                <a href="#" title="Next" class="Pagenext"></a>
-	                                
-	                            </span>
-
-	                        </div>
-	                        <!--\\w-->
-	                        <!--@m-->
-	                        <div class="whide">
-	                            <div class="pd10">
-	                               Items 1 to 40 of 1606 total
-	                            </div>
-	                                
-	                            <div class="doTable">
-	                                <div class="doTd">
-	                                    <a data-page="1" data-url="#" href="javascript:;" class="button bo doLoad"><span>Load Prev 40</span></a>
-	                                </div> 
-	                                <div class="doTd">
-	                                    <a data-page="2" data-url="#" href="javascript:;" class="button bo"><span>Load Next 40</span></a>
-	                                </div>
-	                                
-	                            </div>
-	                        </div>
-	                        <!--\\m-->
-	                    </div>
-	                    <!--}}pages-->
+			    	    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="pageSize" layout="prev, pager, next, jumper" :total="pageTotal" class="right">
+	    				</el-pagination>
+			    	    <!--}}pages-->
 
 	                </div>
 
@@ -204,44 +168,8 @@
 	        	    </div>
 	        	    <!--}}list-->
 		    	    <!--@pages-->
-		    	    <div id="paging" class="pages">
-
-		    	    	<!--@w-->
-		    	    	<div class="mhide">
-		                    <span class="pagesum">256 Results</span>
-		    	            <span class="paging">
-		    	            	<a href="#" title="Prev" class="Pageprev disabled"></a>
-		    	                <a href="javascript:;" class="pNum">1</a>
-		    	                <a class="pNum clicked" href="#">22</a>
-		    	                <a href="#" class="pNum">3</a>
-		    	                <a href="#" class="pNum">4</a>
-		    	                <a href="#" class="pNum">5</a>
-		    	                ...
-		    	                <a href="#" class="pNum">12</a>      
-		    	                <a href="#" title="Next" class="Pagenext"></a>
-		    	                
-		    	            </span>
-
-		    			</div>
-		    			<!--\\w-->
-		    			<!--@m-->
-		    			<div class="whide">
-		    				<div class="pd10">
-		    		           Items 1 to 40 of 1606 total
-		    		        </div>
-		    		            
-		    		        <div class="doTable">
-		    		        	<div class="doTd">
-		    		            	<a data-page="1" data-url="#" href="javascript:;" class="button bo doLoad"><span>Load Prev 40</span></a>
-		    		            </div> 
-		    		            <div class="doTd">
-		    		            	<a data-page="2" data-url="#" href="javascript:;" class="button bo"><span>Load Next 40</span></a>
-		    		            </div>
-		    		            
-		    		        </div>
-		    	        </div>
-		    			<!--\\m-->
-		    	    </div>
+		    	    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="pageSize" layout="prev, pager, next, jumper" :total="pageTotal" class="right">
+    				</el-pagination>
 		    	    <!--}}pages-->
 		    	</div>    
 			</div>
@@ -267,7 +195,10 @@ export default {
   	return {
   		productData: [],
   		filterData: [],
-  		selectedObj: {}
+  		selectedObj: {},
+  		pageSize: 0,
+  		pageTotal: 0,
+  		currentPage: 1
   	}
   },
   components: {
@@ -288,6 +219,8 @@ export default {
 		if (data.ret && data.data) {
 			this.productData = data.data.productData
 			this.filterData = data.data.filterData
+			this.pageSize = data.data.pageSize
+			this.pageTotal = data.data.pageTotal
 		}
 	},
 	getLabel (labelId) {
@@ -328,7 +261,14 @@ export default {
   			})
   			//  this.selectedObj = {}
   		}
-  	}
+  	},
+  	//  pageation
+  	handleSizeChange (val) {
+        console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange (val) {
+        console.log(`当前页: ${val}`)
+    }
   }
 }
 </script>

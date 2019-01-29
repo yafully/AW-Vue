@@ -1,6 +1,8 @@
 {
   "ret": true,
   "data": {
+    "pageSize": 20,
+    "pageTotal": 120,
     "productData": [{
       "productName": "3D Red Eye Minnow Jigging Spoon Metal Hard Fishing",
       "id": "1001",

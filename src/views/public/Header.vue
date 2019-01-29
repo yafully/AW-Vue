@@ -1,5 +1,5 @@
 <template>
-    <div id="head"> 
+    <div id="head" :class="[menuStatus != null ? 'menuIn' :'']"> 
 	    <!--@Notice-->
 	    <div class="topApp" id="topApp">
 	        <div class="topAppIn">
@@ -20,29 +20,29 @@
 	                    <a href="javascript:;" class="menuLink searchCall"><em class="menuIcon icon_search"></em></a>
 	                </div>
 
-	                <div class="menuItem dropSec mhide miniAccount" data-notop="1" id="logLink">
-	                    <a href="#" class="menuLink"><em class="menuIcon icon_account"></em></a>
-	                    <div class="headDrop dropBox">
-	                        <div class="menuSubItem">
-	                            <a rel="nofollow" href="#" class="accLink">Dashborad</a>
-	                        </div>
-	                        <div class="menuSubItem">
-	                            <a rel="nofollow" href="#" class="accLink">Recent View</a>
-	                        </div>
-	                        <div class="menuSubItem">
-	                            <a rel="nofollow"  href="#" class="accLink">Wishlist</a>
-	                        </div>
-	                        <div class="menuSubItem">
-	                            <a rel="nofollow"  href="#" class="accLink">Wishlist</a>
-	                        </div>
-	                        <div class="menuSubItem">
-	                            <a rel="nofollow"  href="#" class="accLink">Wishlist</a>
-	                        </div>
-	                        <div class="menuSubItem">
-	                            <a rel="nofollow" href="#" class="accLink oran">Logout</a>
-	                        </div>
-	                    </div>
-	                </div>
+	                <el-dropdown class="menuItem mhide miniAccount">
+	                	<a href="#" class="menuLink"><em class="menuIcon icon_account"></em></a>
+	                	<el-dropdown-menu slot="dropdown">
+	                		<el-dropdown-item>
+								<a rel="nofollow" href="#" class="accLink">Dashborad</a>
+	                		</el-dropdown-item>
+	                		<el-dropdown-item>
+								<a rel="nofollow" href="#" class="accLink">Recent View</a>
+	                		</el-dropdown-item>
+	                		<el-dropdown-item>
+								<a rel="nofollow" href="#" class="accLink">Wishlist</a>
+	                		</el-dropdown-item>
+	                		<el-dropdown-item>
+								<a rel="nofollow" href="#" class="accLink">My Order</a>
+	                		</el-dropdown-item>
+	                		<el-dropdown-item>
+								<a rel="nofollow" href="#" class="accLink">Address Book</a>
+	                		</el-dropdown-item>
+	                		<el-dropdown-item>
+								<a rel="nofollow" href="#" class="accLink">Logout</a>
+	                		</el-dropdown-item>
+	                	</el-dropdown-menu>	
+	                </el-dropdown>
 
 	                <mini-cart></mini-cart>
 
@@ -98,13 +98,50 @@
 	        </div>
 	        <!--//Currency-->
 	    </div>
+		
+		<div class="menuBox">  
+	        <!--@menu-->
+	        <div class="menu" id="submode">
 
-	    <main-menu></main-menu>
+	            <div class="menuLog">
+	                <div class="doTd">
+	                    <em class="flags ca"></em>
+	                    <span class="dropdown">
+	                        <select class="select" name="currency">
+	                            <option value="1">US Dollar</option>
+	                            <option value="2">Australian Dollar</option>
+	                            <option value="3">Brazilian Real</option>
+	                        </select>
+	                    </span>
+	                </div>
+	                <div class="doTd">
+	                    <a href="#">
+	                        My Account
+	                    </a>
+	                </div>
+	                <div class="doTd logout">
+	                    <a href="#">
+	                        <em class="icon24 icon_logout"></em>
+	                    </a>
+	                </div>
+	            </div>
+
+	            <div class="menuScroll">
+	            	<div class="menuScrollScope">
+	                	<main-menu :menus="menuList" v-on:menuonopen="bgOn" v-on:menuonclose="bgOff"></main-menu>
+	                </div>
+	            </div>
+	            <div class="menuBar"><em class="icon64 icon_close menuCall"></em></div>
+	        </div>
+	        <!--\\menu-->
+	    </div>
+	    
     </div>
 </template>
 
 <script>
 //  import '/@css/common.css'
+import axios from 'axios'
 import MainMenu from '../menu/MainMenu'
 import MiniCart from '../checkout/minicart/MiniCart'
 export default {
@@ -112,6 +149,34 @@ export default {
   components: {
   	MainMenu,
   	MiniCart
+  },
+  data () {
+  	return {
+  		menuList: [],
+  		menuStatus: null
+  	}
+  },
+  mounted () {
+    this.getMainMenuData()
+  },
+  methods: {
+    getMainMenuData () {
+        axios.get('/api/mainmenu.json')
+                .then(this.getDataOk)
+    },
+    getDataOk (res) {
+        const data = res.data
+        if (data.ret && data.data) {
+            this.menuList = data.data.menus
+        }
+    },
+    //  menuBgEvt.
+    bgOn (status) {
+    	this.menuStatus = status
+    },
+    bgOff (status) {
+    	this.menuStatus = status
+    }
   }
 }
 </script>

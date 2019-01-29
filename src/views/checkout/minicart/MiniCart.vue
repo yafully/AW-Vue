@@ -1,16 +1,20 @@
 <template>
-	<div class="menuItem dropSec miniCart" data-notop="1">
-        <a href="#" class="menuLink"><em class="menuIcon icon_cart"><dfn class="mNum">2</dfn></em></a>
-        <div class="headDrop dropBox" style="display:block">
+	<el-dropdown class="menuItem miniCart">
+        <a href="#" class="menuLink">
+        	<em class="menuIcon icon_cart">
+        		<dfn class="mNum" v-if="totalItem > 0" v-text="totalItem"></dfn>
+        	</em>
+        </a>
 
+		<el-dropdown-menu class="el-dropdown-menu el-popper miniDrop" slot="dropdown">	
         	<div v-if="totalItem > 0">
 	            <div class="miniTitle">Shopping Cart</div>
 	            <div class="scrollScope" id="miniScroll">
 	                <!--@Minicart-->
-	                <div class="miniList">
+	                <el-collapse class="miniList" v-model="activeNames">
 	                    <div 
 	                    class="miniPro" 
-	                    v-for="item of miniData" 
+	                    v-for="(item, index) of miniData" 
 	                    :key="item.id"
 	                    >
 	                        <div class="doTd miniPic">
@@ -27,17 +31,16 @@
 	                            	v-text="item.productName"
 	                            	></a>
 	                            </div>
-	                            <div class="miniOp" v-if="item.hasOwnProperty('customOption')">
-	                                <a href="javascript:;" class="red miniDt" rel="nofollow"><span class="vm">See Details</span><em class="icon14 icon_explan"></em></a>
-	                                <div class="miniOpts">
+
+	                            <el-collapse-item title="See Details" class="miniOp" v-if="item.hasOwnProperty('customOption')" :name="index">
 	                                    <div 
 	                                    class="miniOpt" 
 	                                    v-for="(opt, key, inx) of item.customOption" 
 	                                    :key="item.id+inx">
 	                                    	<b v-text="key"></b> / {{opt}}
 	                                    </div>
-	                                </div>
-	                            </div>
+	                            </el-collapse-item>
+
 	                            <div class="miniPrice">
 	                                <span class="price" v-if="item.specialPrice != '0'">
 	                                	<b v-text="item.specialPrice"></b>
@@ -57,7 +60,7 @@
 	                        </div>
 	                    </div>
 
-	                </div>
+	                </el-collapse>
 	                <!--\\Minicart-->
 	            </div>
 	            
@@ -79,8 +82,8 @@
 			
 			<div v-else class="pd20 gray">You have no item in your shopping cart.</div>
 
-        </div>
-    </div>
+        </el-dropdown-menu>
+    </el-dropdown>
 </template>
 
 <script>
@@ -91,7 +94,9 @@ export default {
   	return {
   		totalItem: 0,
   		subTotal: '0',
-  		miniData: {}
+  		miniData: {},
+  		//  Accordding
+  		activeNames: []
   	}
   },
   mounted () {
@@ -115,5 +120,7 @@ export default {
 </script>
 
 <style scoped>
-
+.miniDrop{
+	width:344px;top:40px;right:0;padding:1em;
+}
 </style>
