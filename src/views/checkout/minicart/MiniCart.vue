@@ -119,8 +119,18 @@ export default {
 }
 </script>
 
-<style scoped>
-.miniDrop{
+<style lang="stylus" scoped>
+.miniDrop
 	width:344px;top:40px;right:0;padding:1em;
-}
+
+.miniOp >>> .el-collapse-item__header
+	height:38px;border-bottom:none;
+.miniOp >>> .el-collapse-item__wrap
+	border-bottom:none;
+
+.miniOp 
+	.el-collapse-item__wrap 
+		.el-collapse-item__content
+			border-bottom:5px;
+
 </style>

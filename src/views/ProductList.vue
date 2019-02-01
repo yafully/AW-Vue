@@ -1,6 +1,7 @@
 <template>
 	<div class="page">
 		<public-header></public-header>
+		<public-search></public-search>
 		<!--@Vs-->
 		<div class="wrap">
         	<!--@listVs-->
@@ -186,6 +187,7 @@
 </style>
 <script>
 import PublicHeader from './public/Header'
+import PublicSearch from './public/Search'
 import PublicFooter from './public/Footer'
 import PublicBread from './public/Bread'
 import axios from 'axios'
@@ -203,6 +205,7 @@ export default {
   },
   components: {
 	PublicHeader,
+	PublicSearch,
 	PublicFooter,
 	PublicBread
   },
