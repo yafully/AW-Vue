@@ -24,8 +24,8 @@
 		                    	<em class="menuIcon icon_search"></em>
 		                    </a>
 		                </div>
-
-		                <el-dropdown class="menuItem mhide miniAccount">
+						
+		                <el-dropdown class="menuItem mhide miniAccount" v-if="user != 'Guest'">
 		                	<a href="#" class="menuLink"><em class="menuIcon icon_account"></em></a>
 		                	<el-dropdown-menu slot="dropdown">
 		                		<el-dropdown-item>
@@ -48,6 +48,13 @@
 		                		</el-dropdown-item>
 		                	</el-dropdown-menu>	
 		                </el-dropdown>
+
+		                <a href="#" 
+		                class="menuLink" 
+		                v-if="user == 'Guest'" 
+		                 @click="dialogLoginVisible = true">
+		                	<em class="menuIcon icon_account"></em>
+		                </a>
 
 		                <mini-cart></mini-cart>
 
@@ -145,6 +152,25 @@
 
 		<public-search :searchIn="searchIn" v-on:searchinit="searchToggle"></public-search>
 
+		<el-dialog title="SIGN IN" :visible.sync="dialogLoginVisible" center width="470px">
+		  <el-form :model="form" :rules="rules" :label-position="labelPosition" ref="loginForm">
+		    <el-form-item 
+		    label="Email Address:" 
+		    prop="email"
+		    >
+		      <el-input v-model="form.email" autocomplete="off"></el-input>
+		    </el-form-item>
+		    <el-form-item 
+		    label="Password:" 
+		    prop="password">
+		      <el-input v-model="form.password" autocomplete="off"></el-input>
+		    </el-form-item>
+		  </el-form>
+		  <div slot="footer" class="dialog-footer">
+		    <el-button type="primary" @click="submitForm('loginForm')">Sign In</el-button>
+		  </div>
+		</el-dialog>
+
 	</div>
 </template>
 
@@ -154,6 +180,7 @@ import axios from 'axios'
 import MainMenu from '../menu/MainMenu'
 import MiniCart from '../checkout/minicart/MiniCart'
 import PublicSearch from './Search'
+import { mapState } from 'vuex'
 export default {
   name: 'PublicHeader',
   components: {
@@ -165,11 +192,30 @@ export default {
   	return {
   		menuList: [],
   		menuStatus: null,
-  		searchIn: false
+  		searchIn: false,
+  		dialogLoginVisible: false,
+  		labelPosition: 'top',
+  		form: {
+  			email: '',
+  			password: ''
+  		},
+  		rules: {
+  			email: [
+			  { required: true, message: 'Please enter email address.', trigger: 'blur' },
+		      { type: 'email', message: 'Please enter a valid email address.', trigger: ['blur', 'change'] }
+  			],
+  			password: [
+  			  {required: true, message: 'This is a required filed.', trigger: 'blur'}
+  			]
+  		}
   	}
   },
+	computed: {
+		...mapState(['user'])
+	},
   mounted () {
     this.getMainMenuData()
+    console.log(this.user)
   },
   methods: {
     getMainMenuData () {
@@ -196,7 +242,19 @@ export default {
     	} else {
     		this.searchIn = status
     	}
-    }
+    },
+    //  login valid
+    submitForm (formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+          	this.dialogFormVisible = false
+            alert('submit!')
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
+     }
   }
 }
 </script>
